@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Order Confirmed</title></head>
+<body class="p-4">
+<h1>Thank you — order placed</h1>
+<p>Billing to: <span th:text="${billing.name}"></span></p>
+<p>Address: <span th:text="${billing.address}"></span>, <span th:text="${billing.city}"></span></p>
+<p><a href="/products">Back to shopping</a></p>
+</body>
+</html>

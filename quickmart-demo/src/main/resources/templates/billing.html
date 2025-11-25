@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"/><title>Checkout / Billing</title></head>
+<body>
+<h1>Billing & Payment</h1>
+
+<div th:if="${errors != null}">
+    <p style="color:red" th:each="e : ${errors}" th:text="${e}">error</p>
+</div>
+
+<form th:action="@{/cart/place-order}" th:object="${billing}" method="post">
+    <label>Full name: <input type="text" th:field="*{fullName}" required/></label><br/>
+    <label>Address: <input type="text" th:field="*{address}" required/></label><br/>
+    <label>City: <input type="text" th:field="*{city}" required/></label><br/>
+    <label>Postal code: <input type="text" th:field="*{postalCode}" required/></label><br/>
+    <label>Payment method:
+        <select th:field="*{paymentMethod}">
+            <option value="card">Card (demo)</option>
+            <option value="cod">Cash on delivery</option>
+        </select>
+    </label><br/>
+    <h3>Order Summary</h3>
+    <ul>
+        <li th:each="it: ${cart}">
+            <span th:text="${it.product.name}"></span> x <span th:text="${it.qty}"></span>
+            - Rs.<span th:text="${it.product.price * it.qty}"></span>
+        </li>
+    </ul>
+    <p>Total: Rs.<span th:text="${total}"></span></p>
+    <button type="submit">Place Order</button>
+</form>
+
+<p><a href="/cart">Back to cart</a></p>
+</body>
+</html>
